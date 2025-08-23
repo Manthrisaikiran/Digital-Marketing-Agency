@@ -2,8 +2,6 @@
 
 A clean and modern Digital Marketing Agency website showcasing core services for businesses looking to grow their online presence.
 
-Live Demo: https://manthrisaikiran.github.io/Digital-Marketing-Agency/
-
 About the Project
 
 This website highlights the essential services offered by a digital marketing agency, helping clients reach their audience effectively:
@@ -30,16 +28,10 @@ Responsive layout for desktop and mobile devices
 
 Easy to customize for additional services or content
 
-Future Enhancements
-
-Add About Us section to introduce the team
-
-Add Portfolio/Projects section to showcase work
-
-Add Contact Form for client inquiries
-
-Include Testimonials for social proof
 
 Contact
+
 Manthri Sai Kiran
+
 📧 Email: manthrisai35353@gmail.com
+
