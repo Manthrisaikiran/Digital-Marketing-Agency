@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Marketing Company</title>
+  <style>
+    /* Popup styles */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 350px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .popup-content.success { border-left: 6px solid #28a745; }
+    .popup-content.error { border-left: 6px solid #dc3545; }
+    .popup-content h3 { margin: 0 0 10px; }
+    .popup button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      font-size: 14px;
+    }
+    .popup button:hover { background: #0056b3; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="logo">
+      <h1>Manthri Sai Kiran</h1>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="content-overlay">
+      <h2>Welcome to Manthri-sai Codes Marketing Company!</h2>
+      <p>We specialize in delivering innovative marketing solutions designed to help your business grow and thrive in today’s competitive market. 
+      Our expert team focuses on crafting result-driven strategies tailored to your unique goals, ensuring measurable success and long-term impact for your brand.</p>
+      <button class="get-started-button">Get Started</button>
+    </div>
+  </div>
+
+  <h2 id="services" class="titles">Services</h2>
+  <!-- Services (unchanged) -->
+
+  <h2 id="testimonials" class="titles">Testimonials</h2>
+  <!-- Testimonials (unchanged) -->
+
+  <!-- Contact Form -->
+  <h2 id="contact" class="titles">Contact Us</h2>
+  <div class="contact-container">
+    <form id="contact-form" action="https://formspree.io/f/xyzdbzyk" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <!-- Hidden anti-spam field -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="popup" class="popup">
+    <div id="popup-content" class="popup-content">
+      <h3 id="popup-title"></h3>
+      <p id="popup-message"></p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const popup = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+    const popupTitle = document.getElementById('popup-title');
+    const popupMessage = document.getElementById('popup-message');
+    let popupTimer;
+
+    function showPopup(type, title, message) {
+      popup.style.display = "flex";
+      popupContent.className = `popup-content ${type}`;
+      popupTitle.textContent = title;
+      popupMessage.textContent = message;
+
+      // Auto-close after 4 seconds
+      clearTimeout(popupTimer);
+      popupTimer = setTimeout(() => {
+        closePopup();
+      }, 4000);
+    }
+
+    function closePopup() {
+      popup.style.display = "none";
+      clearTimeout(popupTimer);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        showPopup("success", "Message Sent ✅", "Thanks for your message! We'll get back to you soon.");
+        form.reset();
+      } else {
+        showPopup("error", "Error ❌", "Oops! There was a problem submitting your form.");
+      }
+    });
+  </script>
+
+</body>
+</html>
